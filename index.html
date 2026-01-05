@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgetly - Premium Budget Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Budgetly</h1>
+            <p>Master your finances with style</p>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Balance Card -->
+            <section class="card balance-card">
+                <h2>Your Balance</h2>
+                <h1 id="balance">$0.00</h1>
+
+                <div class="inc-exp-container">
+                    <div>
+                        <h4>Income</h4>
+                        <p id="money-plus" class="money plus">+$0.00</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                        <h4>Expense</h4>
+                        <p id="money-minus" class="money minus">-$0.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chart Section -->
+            <section class="card chart-card">
+                <canvas id="budgetChart"></canvas>
+            </section>
+
+            <!-- Add Transaction -->
+            <section class="card form-card">
+                <h3>Add New Transaction</h3>
+                <form id="form">
+
+                    <!-- Type Toggle -->
+                    <div class="transaction-type">
+                        <div id="type-exp" class="type-btn active">
+                            <span>Expense</span>
+                        </div>
+                        <div id="type-inc" class="type-btn">
+                            <span>Income</span>
+                        </div>
+                        <input type="hidden" id="trans-type" value="expense">
+                    </div>
+                    <div class="form-control">
+                        <label for="text">Description</label>
+                        <input type="text" id="text" placeholder="e.g. Salary, Groceries..." />
+                    </div>
+                    <div class="form-control half-width-container">
+                        <div class="half-width">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" placeholder="0.00" step="0.01" />
+                        </div>
+                        <div class="half-width">
+                            <label for="category">Category</label>
+                            <select id="category">
+                                <option value="income" class="inc-opt">Income </option>
+                                <option value="food">Food </option>
+                                <option value="transport">Transport </option>
+                                <option value="shopping">Shopping </option>
+                                <option value="entertainment">Entertainment </option>
+                                <option value="bills">Bills </option>
+                                <option value="other">Other </option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn">Add Transaction</button>
+                </form>
+            </section>
+
+            <!-- History -->
+            <section class="card history-card">
+                <h3>History</h3>
+                <div id="empty-state" class="empty-state hidden">
+                    <span class="material-icons-round empty-icon">savings</span>
+                    <p>No transactions yet.<br>Start by adding one!</p>
+                </div>
+                <ul id="list" class="list">
+
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
