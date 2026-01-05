@@ -9,24 +9,24 @@ const category = document.getElementById('category');
 const budgetChartEl = document.getElementById('budgetChart');
 const emptyState = document.getElementById('empty-state');
 
-// Toggle Elements
+
 const typeExpBtn = document.getElementById('type-exp');
 const typeIncBtn = document.getElementById('type-inc');
 const transTypeInput = document.getElementById('trans-type');
 
-// Local Storage Support
+
 const localStorageTransactions = JSON.parse(
   localStorage.getItem('transactions')
 );
 
-// State
+
 let transactions =
   localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
 
-// Chart Instance
+
 let chart;
 
-// Toggle Event Listeners
+
 typeExpBtn.addEventListener('click', () => {
   transTypeInput.value = 'expense';
   typeExpBtn.classList.add('active');
@@ -41,7 +41,7 @@ typeIncBtn.addEventListener('click', () => {
   updateCategoryOptions('income');
 });
 
-// Category Options Data
+
 const expenseCategories = `
     <option value="food">Food 🍔</option>
     <option value="transport">Transport 🚕</option>
@@ -52,8 +52,8 @@ const expenseCategories = `
 `;
 
 const incomeCategories = `
-    <option value="income">Salary/Income 💰</option>
-    <option value="other">Other Income 💵</option>
+    <option value="income">Salary/Income </option>
+    <option value="other">Other Income </option>
 `;
 
 function updateCategoryOptions(type) {
@@ -64,24 +64,23 @@ function updateCategoryOptions(type) {
   }
 }
 
-// Initialize with default options (Expense)
+
 updateCategoryOptions('expense');
 
-// Add transaction
+
 function addTransaction(e) {
   e.preventDefault();
 
   if (text.value.trim() === '' || amount.value.trim() === '') {
     alert('Please add a text and amount');
   } else {
-    // Determine sign based on toggle
     const type = transTypeInput.value;
     let finalAmount = +amount.value;
 
     if (type === 'expense') {
-      finalAmount = -Math.abs(finalAmount); // Ensure it's negative
+      finalAmount = -Math.abs(finalAmount);
     } else {
-      finalAmount = Math.abs(finalAmount); // Ensure it's positive
+      finalAmount = Math.abs(finalAmount);
     }
 
     const transaction = {
@@ -104,12 +103,12 @@ function addTransaction(e) {
   }
 }
 
-// Generate random ID
+
 function generateID() {
   return Math.floor(Math.random() * 100000000);
 }
 
-// Get Category Details
+
 const categoryDetails = {
   income: { icon: '💰', label: 'Income' },
   food: { icon: '🍔', label: 'Food' },
@@ -120,18 +119,15 @@ const categoryDetails = {
   other: { icon: '📦', label: 'Other' }
 };
 
-// Add transactions to DOM list
+
 function addTransactionDOM(transaction) {
-  // Get sign
   const sign = transaction.amount < 0 ? '-' : '+';
 
-  // Get Category info (fallback to other if missing)
   const catKey = transaction.category || 'other';
   const cat = categoryDetails[catKey] || categoryDetails['other'];
 
   const item = document.createElement('li');
 
-  // Add class based on value
   item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
 
   item.innerHTML = `
@@ -148,7 +144,7 @@ function addTransactionDOM(transaction) {
   list.appendChild(item);
 }
 
-// Update the balance, income, expense and charts
+
 function updateValues() {
   const amounts = transactions.map(transaction => transaction.amount);
 
@@ -171,7 +167,7 @@ function updateValues() {
   updateChart();
 }
 
-// Remove transaction by ID
+
 function removeTransaction(id) {
   transactions = transactions.filter(transaction => transaction.id !== id);
 
@@ -180,12 +176,12 @@ function removeTransaction(id) {
   init();
 }
 
-// Update local storage transactions
+
 function updateLocalStorage() {
   localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
-// Check Empty State
+
 function checkEmptyState() {
   if (transactions.length === 0) {
     emptyState.classList.remove('hidden');
@@ -196,26 +192,26 @@ function checkEmptyState() {
   }
 }
 
-// Chart.js Configuration
+
 function initChart() {
   const ctx = budgetChartEl.getContext('2d');
 
   chart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: [], // Populated dynamically
+      labels: [],
       datasets: [{
         data: [],
         backgroundColor: [
-          '#ffadad', // Pastel Red
-          '#ffd6a5', // Pastel Orange
-          '#fdffb6', // Pastel Yellow
-          '#caffbf', // Pastel Green
-          '#9bf6ff', // Pastel Cyan
-          '#a0c4ff', // Pastel Blue
-          '#bdb2ff'  // Pastel Purple
+          '#ffadad',
+          '#ffd6a5',
+          '#fdffb6',
+          '#caffbf',
+          '#9bf6ff',
+          '#a0c4ff',
+          '#bdb2ff'
         ],
-        borderWidth: 0, // Cleaner without border
+        borderWidth: 0,
         hoverOffset: 10
       }]
     },
@@ -255,13 +251,9 @@ function initChart() {
 function updateChart() {
   if (!chart) return;
 
-  // Calculate Expense by Category (ignore Income for this chart usually, or separate)
-  // We will show Expenses Breakdown by default as it's more useful
   const expenseTransactions = transactions.filter(t => t.amount < 0);
 
   if (expenseTransactions.length === 0) {
-    // If no expenses, maybe show transparent or placeholder? 
-    // For now, let's clear it
     chart.data.labels = ['No Expenses'];
     chart.data.datasets[0].data = [1];
     chart.data.datasets[0].backgroundColor = ['rgba(255,255,255,0.1)'];
@@ -273,7 +265,7 @@ function updateChart() {
 
   expenseTransactions.forEach(t => {
     const cat = t.category || 'other';
-    const label = categoryDetails[cat].label; // Use pretty label
+    const label = categoryDetails[cat].label;
     const amount = Math.abs(t.amount);
 
     if (categories[label]) {
@@ -286,16 +278,14 @@ function updateChart() {
   const labels = Object.keys(categories);
   const data = Object.values(categories);
 
-  // Reset colors if coming from empty state
-  // Top 7 Neon Colors for Dark Theme
   const colors = [
-    '#f72585', // Neon Pink
-    '#7209b7', // Purple
-    '#3a0ca3', // Deep Blue
-    '#4361ee', // Blue
-    '#4cc9f0', // Cyan
-    '#2ecc71', // Neon Green
-    '#f39c12'  // Orange
+    '#f72585',
+    '#7209b7',
+    '#3a0ca3',
+    '#4361ee',
+    '#4cc9f0',
+    '#2ecc71',
+    '#f39c12'
   ];
 
   chart.data.labels = labels;
@@ -304,7 +294,6 @@ function updateChart() {
   chart.data.datasets[0].borderWidth = 0;
   chart.data.datasets[0].hoverOffset = 15;
 
-  // Update Chart Options for Dark Mode
   chart.options.plugins.legend.labels.color = '#fff';
   chart.options.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
   chart.options.plugins.tooltip.titleColor = '#fff';
@@ -313,7 +302,7 @@ function updateChart() {
   chart.update();
 }
 
-// Init app
+
 function init() {
   list.innerHTML = '';
   checkEmptyState();

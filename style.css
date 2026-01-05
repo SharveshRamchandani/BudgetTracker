@@ -1,7 +1,7 @@
 :root {
     --bg-color: #0f0c29;
     --card-bg: rgba(255, 255, 255, 0.05);
-    /* Glass effect */
+
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --accent-color: #7b2cbf;
@@ -33,7 +33,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Background Blobs */
+
 .background-blobs {
     position: fixed;
     top: 0;
@@ -116,7 +116,7 @@ header p {
     font-weight: 300;
 }
 
-/* Dashboard Grid */
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -129,7 +129,7 @@ header p {
     }
 }
 
-/* Glassmorphism Card */
+
 .card {
     background: var(--card-bg);
     backdrop-filter: blur(16px);
@@ -155,7 +155,7 @@ header p {
     color: var(--text-primary);
 }
 
-/* Balance Section */
+
 .balance-card {
     grid-column: 1 / 2;
     text-align: center;
@@ -207,7 +207,7 @@ header p {
     text-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
 }
 
-/* Chart Card */
+
 .chart-card {
     grid-column: 2 / 3;
     display: flex;
@@ -217,7 +217,7 @@ header p {
     position: relative;
 }
 
-/* Transaction Type Toggle */
+
 .transaction-type {
     display: flex;
     justify-content: space-between;
@@ -244,7 +244,7 @@ header p {
     color: var(--text-primary);
 }
 
-/* Active States */
+
 .type-btn.active {
     color: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -253,17 +253,15 @@ header p {
 
 #type-exp.active {
     background: var(--expense-color);
-    /* Red */
     box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
 }
 
 #type-inc.active {
     background: var(--income-color);
-    /* Green */
     box-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
 }
 
-/* Form Card */
+
 .form-card {
     grid-column: 1 / 2;
 }
@@ -295,10 +293,9 @@ header p {
     appearance: none;
 }
 
-/* Fix for select dropdown option colors in Chrome */
+
 .form-control select option {
     background: #1a1a2e;
-    /* Dark background for options */
     color: #fff;
 }
 
@@ -344,7 +341,7 @@ header p {
     transform: translateY(-2px);
 }
 
-/* History Card */
+
 .history-card {
     grid-column: 2 / 3;
     max-height: 450px;
@@ -360,7 +357,7 @@ header p {
     border-radius: 4px;
 }
 
-/* Empty State */
+
 .empty-state {
     text-align: center;
     padding: 40px;
@@ -383,7 +380,7 @@ header p {
     font-size: 1rem;
 }
 
-/* List Items */
+
 .list {
     list-style: none;
 }
@@ -464,7 +461,7 @@ header p {
     transform: translate(0, -50%) scale(1);
 }
 
-/* Mobile */
+
 @media (max-width: 768px) {
 
     .balance-card,
